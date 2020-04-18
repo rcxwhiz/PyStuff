@@ -10,9 +10,8 @@ int main()
 
 	PyStuff::vector<int> test2 = PyStuff::vector<int>(test);
 	std::cout << test2.contains(-1) << std::endl;
-	std::cout << test2.join() << std::endl;
-	auto it = test2.cbegin();
-	std::cout << *it << std::endl;
+	test2 * 2;
+	std::cout << (test2 * 2).size() << std::endl;
 
 	return 0;
 }

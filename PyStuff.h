@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <iostream>
 
 namespace PyStuff
 {
@@ -26,7 +27,16 @@ namespace PyStuff
 
 		vector& operator= (const vector& vectorIn)
 		{
-			vector_ = vectorIn.vector_;
+			// TODO neither of these work when doing multiply
+
+//			vector_ = vectorIn.vector_;
+
+			vector_.clear();
+			vector_.reserve(vectorIn.size());
+			for (const auto& item : vectorIn)
+			{
+				vector_.push_back(item);
+			}
 		}
 
 		vector& operator= (vector&& vectorIn) noexcept
@@ -34,7 +44,7 @@ namespace PyStuff
 			vector_ = vectorIn.vector_;
 		}
 
-//		vector& operator= (braced-init-list<T> initializerList)
+		// TODO initializer list = operator
 
 		/*
 		 * Iterators
@@ -277,6 +287,24 @@ namespace PyStuff
 		 * My custom functions
 		 * -------------------------------------------------------------------------------------------------------------
 		 */
+
+		vector operator* (size_t multiplier)
+		{
+//			std::cout << "Entering multiply" << std::endl;
+//			std::cout << join() << std::endl;
+			std::vector<T> newVector;
+			newVector.reserve(vector_.size() * multiplier);
+			for (size_t i = 0; i < multiplier; i++)
+			{
+				for (const auto& item : vector_)
+				{
+					newVector.push_back(item);
+				}
+			}
+			vector_ = newVector;
+			std::cout << "After multiply" << std::endl;
+			std::cout << join() << std::endl;
+		}
 
 		typename std::vector<T>::iterator find(const T& value)
 		{
