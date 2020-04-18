@@ -11,11 +11,8 @@ int main()
 	PyStuff::vector<int> test2 = PyStuff::vector<int>(test);
 	std::cout << test2.contains(-1) << std::endl;
 	std::cout << test2.join() << std::endl;
-	auto it = test2.begin();
+	auto it = test2.cbegin();
 	std::cout << *it << std::endl;
-
-	std::string testString = "my1big1boy1";
-	size_t size = test2.size();
 
 	return 0;
 }

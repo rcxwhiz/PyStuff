@@ -27,13 +27,11 @@ namespace PyStuff
 		vector& operator= (const vector& vectorIn)
 		{
 			vector_ = vectorIn.vector_;
-//			vector_ = std::copy(vectorIn.vector_);
 		}
 
 		vector& operator= (vector&& vectorIn) noexcept
 		{
 			vector_ = vectorIn.vector_;
-//			vector_ = std::move(vectorIn.vector_);
 		}
 
 //		vector& operator= (braced-init-list<T> initializerList)
