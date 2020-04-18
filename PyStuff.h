@@ -10,10 +10,10 @@ namespace PyStuff
 	template <typename T>
 	class vector
 	{
-	public:
-		// TODO make this guy private
+	private:
 		std::vector<T> vector_;
 
+	public:
 		vector() = default;
 		explicit vector(std::vector<T> vectorIn)
 		{
@@ -40,6 +40,7 @@ namespace PyStuff
 
 		/*
 		 * Iterators
+		 * -------------------------------------------------------------------------------------------------------------
 		 */
 
 		typename std::vector<T>::iterator begin() noexcept
@@ -104,6 +105,7 @@ namespace PyStuff
 
 		/*
 		 * Capacity
+		 * -------------------------------------------------------------------------------------------------------------
 		 */
 
 		size_t size() const noexcept
@@ -148,6 +150,7 @@ namespace PyStuff
 
 		/*
 		 * Element Access
+		 * -------------------------------------------------------------------------------------------------------------
 		 */
 
 		T& operator[] (size_t index)
@@ -202,6 +205,7 @@ namespace PyStuff
 
 		/*
 		 * Modifiers
+		 * -------------------------------------------------------------------------------------------------------------
 		 */
 
 		// TODO iterator assign
@@ -273,18 +277,34 @@ namespace PyStuff
 
 		/*
 		 * My custom functions
+		 * -------------------------------------------------------------------------------------------------------------
 		 */
+
+		typename std::vector<T>::iterator find(const T& value)
+		{
+			auto it = vector_.begin();
+			while (it != vector_.end())
+			{
+				if (*it == value)
+				{
+					break;
+				}
+				it++;
+			}
+			return it;
+		}
 
 		bool contains(const T& value)
 		{
-			for (const auto& item : vector_)
-			{
-				if (item == value)
-				{
-					return true;
-				}
-			}
-			return false;
+			return find(value) != vector_.end();
+//			for (const auto& item : vector_)
+//			{
+//				if (item == value)
+//				{
+//					return true;
+//				}
+//			}
+//			return false;
 		}
 
 		std::string join(const std::string& joiner = ", ")
@@ -312,7 +332,7 @@ namespace PyStuff
 		{
 			if (contains(value))
 			{
-				vector_.erase(vector_.find(value));
+				vector_.erase(find(value));
 			}
 		}
 
@@ -320,7 +340,7 @@ namespace PyStuff
 		{
 			while (contains(value))
 			{
-				vector_.erase(vector_.find(value));
+				vector_.erase(find(value));
 			}
 		}
 
